@@ -41,20 +41,117 @@ class _MyCustomFormState extends State<MyCustomForm> {
           controller: myController,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context, 
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('Alert Dialog'),
-                content: Text(myController.text),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          const SizedBox(height: 16), // Espacio entre los botones.
+          OutlinedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('AlertDialog'),
+                    content: Text(myController.text),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Tancar'),
+                      ),
+                    ],
+                  );
+                },
               );
             },
-          );
-        },
-        tooltip: 'Mostra el valor!',
-        child: const Icon(Icons.text_fields),
+            child: const Text('Alert Dialog'),
+          ),
+          TextButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (context) {
+                  return SimpleDialog(
+                    title: const Text('SimpleDialog'),
+                    children: [
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(myController.text),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Text('Simple Dialog')  
+          ),
+          OutlinedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                 content: Text(myController.text),
+                 duration: const Duration(seconds: 2),
+                 ),
+              );
+            }, 
+            child: const Text('SnackBar'),
+            ),
+          TextButton(
+            onPressed: () {
+              showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                context: context, 
+                builder: (BuildContext context) {
+                  return Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
+                    ),
+                    height: 200,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text(myController.text),
+                          ElevatedButton(
+                            child: const Text('Close BottomSheet'),
+                            onPressed: () => Navigator.of(context).pop(),
+                            )
+                        ],
+                      ),
+                    )
+                  );
+                },
+              );
+            }, 
+            child: const Text('modalBottomSheet'),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                context: context, 
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Alert Dialog'),
+                    content: Text(myController.text),
+                  );
+                },
+              );
+            },
+            tooltip: 'Mostra el valor!',
+            child: const Icon(Icons.text_fields),
+          ),
+        ],
       ),
     );
   }
