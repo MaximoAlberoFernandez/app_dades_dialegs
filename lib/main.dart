@@ -46,6 +46,30 @@ class _MyCustomFormState extends State<MyCustomForm> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          const SizedBox(height: 16), // Espacio entre los botones.
+          OutlinedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('AlertDialog'),
+                    content: Text(myController.text),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Tancar'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Text('Alert Dialog'),
+          ),
           FloatingActionButton(
             onPressed: () {
               showDialog(
@@ -53,7 +77,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 barrierDismissible: true,
                 builder: (context) {
                   return SimpleDialog(
-                    title: const Text('Choose your option'),
+                    title: const Text('SimpleDialog'),
                     children: [
                       SimpleDialogOption(
                         onPressed: () {
@@ -68,30 +92,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
             },
             tooltip: 'Mostra el valor!',
             child: const Icon(Icons.text_fields),
-          ),
-          const SizedBox(height: 16), // Espacio entre los botones.
-          OutlinedButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                barrierDismissible: true,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Texto en el campo de texto'),
-                    content: Text(myController.text),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Cerrar'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            child: const Text('Mostrar Texto'),
           ),
         ],
       ),
