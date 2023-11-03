@@ -47,6 +47,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             context: context, 
             builder: (context) {
               return AlertDialog(
+                title: const Text('Alert Dialog'),
                 content: Text(myController.text),
               );
             },
