@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key); // Agrega 'Key? key' como parámetro del constructor.
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Recuperar el valor d' 'un camp de text',
+      title: "Recuperar el valor d'un camp de text",
       home: MyCustomForm(),
     );
   }
 }
 
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+  const MyCustomForm({Key? key}) : super(key: key); // Agrega 'Key? key' como parámetro del constructor.
+
   @override
   State<MyCustomForm> createState() => _MyCustomFormState();
 }
@@ -33,7 +34,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('recuperar el valor d\'un camp de text')
+        title: const Text("Recuperar el valor d'un camp de text"), // Corrige el título aquí.
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,10 +45,19 @@ class _MyCustomFormState extends State<MyCustomForm> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
-            context: context, 
+            context: context,
+            barrierDismissible: true,
             builder: (context) {
-              return AlertDialog(
-                content: Text(myController.text),
+              return SimpleDialog(
+                title: const Text('Choose your option'),
+                children: [
+                  SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(myController.text), // Corrige el texto aquí.
+                  ),
+                ],
               );
             },
           );
