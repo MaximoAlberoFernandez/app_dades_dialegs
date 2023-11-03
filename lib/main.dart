@@ -34,6 +34,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recuperar el valor d\'un camp de text'),
+        backgroundColor: Color.fromARGB(255, 26, 152, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,6 +61,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         content: Text(myController.text),
                         actions: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF42A5F5),
+                            ),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -133,7 +137,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                               Text(myController.text),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFF42A5F5),
+                                  backgroundColor: Color(0xFF42A5F5),
                                 ),
                                 child: const Text('Close BottomSheet'),
                                 onPressed: () => Navigator.of(context).pop(),
@@ -150,6 +154,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ],
           ),
           FloatingActionButton(
+            backgroundColor: Color(0xFF42A5F5),      
             onPressed: () {
               showDialog(
                 context: context,
